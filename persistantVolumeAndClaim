@@ -1,0 +1,36 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-fuse-aps-sb-drools-recreate
+  namespace: fuse-aps-sb
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  volumeName: pv-fuse-aps-sb-drools-recreate
+  storageClassName: efs-sc
+  volumeMode: Filesystem
+status:
+  phase: Bound
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 20Gi
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-fuse-aps-sb-drools-recreate
+spec:
+  capacity:
+    storage: 20Gi
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: 'fs-08cff6473771c0037::fsap-0d0365657a9cdc2ce'
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  volumeMode: Filesystem
