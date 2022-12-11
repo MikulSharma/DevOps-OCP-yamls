@@ -1,0 +1,12 @@
+cat <<EOF | tee is.yaml
+apiVersion: v1
+kind: ImageStream
+metadata:
+  name: core-ui
+spec:
+  tags:
+  - from:
+      kind: DockerImage
+      name: docker.prospecta.com/prospecta/core-ui:development
+    name: development
+EOF
